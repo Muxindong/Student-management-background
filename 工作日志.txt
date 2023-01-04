@@ -1,0 +1,6 @@
+2023.1.4
+1.复习git的有关操作，并创建代码仓库
+2.寻找springboot+vue框架的有关教程，选取b站青戈的有关教程
+   https://www.bilibili.com/video/BV1U44y1W77D/?spm_id_from=333.999.0.0
+3.在github上找类似的学生系统后台项目
+4.学习少量的教程视频
