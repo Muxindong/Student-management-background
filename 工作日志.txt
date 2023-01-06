@@ -11,3 +11,9 @@
 3.创建vue框架
 4.使用element-ui进行简单的实践
 5.寻找相似的学生系统后台项目，寻找有关设计
+
+2023.1.6
+1.搭建springboot+jpa+maven有关环境
+2.链接springboot以及postgresql
+3.下载及链接postgersql是出现错误，调错
+4.听有关课程，学增删改查的实现
