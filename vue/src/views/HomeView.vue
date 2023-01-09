@@ -102,8 +102,102 @@
       </el-menu>
       <el-header></el-header>
     </el-container>
-    <el-main style="height: 600px;">Main</el-main>
-    <el-footer>Footer</el-footer>
+    <el-container style="height: 400px;">
+      <el-header style="text-align: right; font-size: 12px">
+        <el-dropdown>
+          <i class="el-icon-setting" style="margin-right: 15px"></i>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>查看</el-dropdown-item>
+            <el-dropdown-item>新增</el-dropdown-item>
+            <el-dropdown-item>删除</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </el-header>
+
+      <el-main style="height: 400px;">
+        <div>
+          <ct>冲突: </ct>
+          <template>
+            <el-select v-model="value1" placeholder="请选择" style="width: 100px">
+              <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </template>
+           <sfym style="margin-left: 10px">是否已满: </sfym>
+          <template>
+            <el-select v-model="value2" placeholder="请选择" style="width: 100px">
+              <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </template>
+          <kcsx style="margin-left: 10px">课程属性: </kcsx>
+          <template>
+            <el-select v-model="value3" placeholder="请选择" style="width: 100px">
+              <el-option
+                  v-for="item in options1"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </template>
+          <kcxz style="margin-left: 10px">课程性质: </kcxz>
+          <template>
+            <el-select v-model="value4" placeholder="请选择" style="width: 200px">
+              <el-option
+                  v-for="item in options2"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+              </el-option>
+            </el-select>
+          </template>
+          <el-input style="width: 200px; margin-left: 10px" suffix-icon="el-icon-search"></el-input><el-button class="ml-5">搜索</el-button>
+        </div>
+        <el-table :data="tableData" height="600">
+          <el-table-column prop="id" label="课程号" width="100">
+          </el-table-column>
+          <el-table-column prop="name" label="课程名" width="100">
+          </el-table-column>
+          <el-table-column prop="teacher" label="教师" width="100">
+          </el-table-column>
+          <el-table-column prop="time" label="时间地点" width="300">
+          </el-table-column>
+          <el-table-column prop="capacity" label="课容量" width="100">
+          </el-table-column>
+          <el-table-column prop="number" label="已选人数" width="100">
+          </el-table-column>
+          <el-table-column prop="nature" label="课程性质">
+          </el-table-column>
+          <el-table-column prop="attribute" label="课程属性">
+          </el-table-column>
+          <el-table-column prop="unit" label="开课单位">
+          </el-table-column>
+          <el-table-column prop="credit" label="学分">
+          </el-table-column>
+          <el-table-column prop="explain" label="课程说明">
+          </el-table-column>
+        </el-table>
+        <div >
+          <el-pagination
+              style="margin-left: 37%"
+              layout="prev, pager, next"
+              :total="1000">
+          </el-pagination>
+        </div>
+      </el-main>
+    </el-container>
+<!--    <el-main style="height: 600px;">Main</el-main>-->
+      <xinxi1 style="margin-left: 615px">（当前选课在线人数9人）</xinxi1>
+    <el-footer style="margin-left: 480px">版权信息：© 2023 北理软工股份有限公司 京ICP备1111号</el-footer>
   </el-container>
 </template>
 
@@ -112,14 +206,97 @@
 export default {
   name: 'HomeView',
   data(){
-    // const item = {
-    //   date: '2016-05-02',
-    //   name: '王小虎',
-    //   address: '上海市普陀区金沙江路 1518 弄'
-    // };
+    const item = {
+      id: '100083017',
+      name: '毕业设计',
+      teacher:'张三',
+      time:'2-3周 星期一 11-13节 3号楼312\n' +
+          '4周 星期六 2-9节 5号楼427\n' +
+          '4周 星期日 2-9节 5号楼427\n' +
+          '5周,8周 星期一 11-13节 5号楼417\n' +
+          '6周 星期一 11-13节 5号楼1005\n' +
+          '7周 星期一 11-13节 5号楼427\n' +
+          '9周 星期一 11-13节 5号楼415',
+      capacity:'30',
+      number:'0',
+      nature:'实践环节',
+      attribute:'必修',
+      unit:'计算机学院',
+      credit:'8',
+      explain:''
+    };
     return{
-      // tableData: Array(15).fill(item),
+      tableData: Array(4).fill(item),
       // msg:"hello Mu"
+      options: [{
+        value: '选项1',
+        label: '请选择'
+      }, {
+        value: '选项2',
+        label: '是'
+      }, {
+        value: '选项3',
+        label: '否'
+      }],
+      value1: '',
+      value2: '',
+
+      options1: [{
+        value: '选项1',
+        label: '请选择'
+      }, {
+        value: '选项2',
+        label: '必修'
+      }, {
+        value: '选项3',
+        label: '选修'
+      }, {
+        value: '选项4',
+        label: '任选'
+      }, {
+        value: '选项5',
+        label: '限选'
+      }, {
+        value: '选项6',
+        label: '校公选课'
+      }],
+      value3: '',
+
+      options2: [{
+        value: '选项1',
+        label: '请选择'
+      }, {
+        value: '选项2',
+        label: '公共基础课程'
+      }, {
+        value: '选项3',
+        label: '拓展英语'
+      }, {
+        value: '选项4',
+        label: '专业基础课程'
+      }, {
+        value: '选项5',
+        label: '专业课'
+      }, {
+        value: '选项6',
+        label: '平台基础'
+      }, {
+        value: '选项7',
+        label: '校公选课'
+      }, {
+        value: '选项8',
+        label: '体育课'
+      }, {
+        value: '选项9',
+        label: '实践环节'
+      }, {
+        value: '选项10',
+        label: '大类基础'
+      }, {
+        value: '选项11',
+        label: '基础教育'
+      }],
+      value4: '',
     }
   }
 }
