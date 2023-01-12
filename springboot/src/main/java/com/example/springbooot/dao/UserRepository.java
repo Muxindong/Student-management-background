@@ -10,4 +10,7 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Query(value = "Select * from users limit ? offset ?", nativeQuery = true)
     List<User> findPage(Integer pagesize,Integer pagenumberfinstid);
+
+    @Query(value = "SELECT count(*) from users", nativeQuery = true)
+    Integer selectTotal();
 }

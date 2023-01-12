@@ -163,7 +163,9 @@
           <el-input style="width: 200px; margin-left: 10px" suffix-icon="el-icon-search"></el-input><el-button class="ml-5">搜索</el-button>
         </div>
         <el-table :data="tableData" height="600">
-          <el-table-column prop="id" label="课程号" width="100">
+<!--          <el-table-column prop="id" label="id" width="50">-->
+<!--          </el-table-column>-->
+          <el-table-column prop="idnumber" label="课程号" width="100">
           </el-table-column>
           <el-table-column prop="name" label="课程名" width="100">
           </el-table-column>
@@ -190,7 +192,7 @@
           <el-pagination
               style="margin-left: 37%"
               layout="prev, pager, next"
-              :total="1000">
+              :total="total">
           </el-pagination>
         </div>
       </el-main>
@@ -206,27 +208,10 @@
 export default {
   name: 'HomeView',
   data(){
-    const item = {
-      id: '100083017',
-      name: '毕业设计',
-      teacher:'张三',
-      time:'2-3周 星期一 11-13节 3号楼312\n' +
-          '4周 星期六 2-9节 5号楼427\n' +
-          '4周 星期日 2-9节 5号楼427\n' +
-          '5周,8周 星期一 11-13节 5号楼417\n' +
-          '6周 星期一 11-13节 5号楼1005\n' +
-          '7周 星期一 11-13节 5号楼427\n' +
-          '9周 星期一 11-13节 5号楼415',
-      capacity:'30',
-      number:'0',
-      nature:'实践环节',
-      attribute:'必修',
-      unit:'计算机学院',
-      credit:'8',
-      explain:''
-    };
+
     return{
-      tableData: Array(4).fill(item),
+      tableData: [],
+      total: 0,
       // msg:"hello Mu"
       options: [{
         value: '选项1',
@@ -298,6 +283,16 @@ export default {
       }],
       value4: '',
     }
+  },
+  created() {
+    //请求分页查询数据
+    fetch( "http://localhost:9090/page?pageNum=1&pageSize=4").then(res => res.json()).then(res => {
+      console.log(res)
+      this.tableData = res.data
+      console.log(this.tableData)
+      this.total = res.total
+      console.log(this.total)
+    })
   }
 }
 </script>

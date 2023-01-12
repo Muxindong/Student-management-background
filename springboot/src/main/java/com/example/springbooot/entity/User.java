@@ -12,6 +12,15 @@ import javax.persistence.Table;
 public class User {
     @Id
     private Integer id;
-    private String username;
-    private String password;
+    private Integer idnumber;
+    private String name;
+    private String teacher;
+    private String time;
+    private Integer capacity;
+    private Integer number;
+    private String nature;
+    private String attribute;
+    private String unit;
+    private Integer credit;
+    private String explain;
 }

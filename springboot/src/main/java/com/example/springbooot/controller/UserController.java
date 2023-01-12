@@ -5,7 +5,9 @@ import com.example.springbooot.entity.User;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -34,9 +36,14 @@ public class UserController {
     }
 
     @RequestMapping("/page")
-    public List<User> findPage(@RequestParam Integer pageNum,@RequestParam Integer pageSize){
+    public Map<String,Object> findPage(@RequestParam Integer pageNum,@RequestParam Integer pageSize){
         Integer pagenumberfinstid=(pageNum-1)*pageSize;
-        return userRepository.findPage(pageSize,pagenumberfinstid);
+        List<User> data = userRepository.findPage(pageSize, pagenumberfinstid);
+        Integer total = userRepository.selectTotal();
+        Map<String,Object> res=new HashMap<>();
+        res.put("data",data);
+        res.put("total",total);
+        return res;
     }
 
     @RequestMapping("/")
