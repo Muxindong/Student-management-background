@@ -33,6 +33,12 @@ public class UserController {
         return userRepository.findById(id);
     }
 
+    @RequestMapping("/page")
+    public List<User> findPage(@RequestParam Integer pageNum,@RequestParam Integer pageSize){
+        Integer pagenumberfinstid=(pageNum-1)*pageSize;
+        return userRepository.findPage(pageSize,pagenumberfinstid);
+    }
+
     @RequestMapping("/")
     public List<User> getUsers(){
         return userRepository.findAll();
