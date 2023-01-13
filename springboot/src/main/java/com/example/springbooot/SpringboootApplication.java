@@ -11,7 +11,6 @@ import java.util.List;
 @SpringBootApplication
 public class SpringboootApplication {
 
-
     public static void main(String[] args) {
         SpringApplication.run(SpringboootApplication.class, args);
     }

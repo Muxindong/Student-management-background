@@ -1,82 +1,4 @@
 <template>
-<!--  <div>-->
-<!--    <el-container style="height: 100%;">-->
-<!--      <el-aside width="200px" style="background-color: rgb(238, 241, 246); height: 100%">-->
-<!--        <el-menu :default-openeds="['1', '3']">-->
-<!--          <el-submenu index="1">-->
-<!--            <template slot="title"><i class="el-icon-message"></i>导航一</template>-->
-<!--            <el-menu-item-group>-->
-<!--              <template slot="title">分组一</template>-->
-<!--              <el-menu-item index="1-1">选项1</el-menu-item>-->
-<!--              <el-menu-item index="1-2">选项2</el-menu-item>-->
-<!--            </el-menu-item-group>-->
-<!--            <el-menu-item-group title="分组2">-->
-<!--              <el-menu-item index="1-3">选项3</el-menu-item>-->
-<!--            </el-menu-item-group>-->
-<!--            <el-submenu index="1-4">-->
-<!--              <template slot="title">选项4</template>-->
-<!--              <el-menu-item index="1-4-1">选项4-1</el-menu-item>-->
-<!--            </el-submenu>-->
-<!--          </el-submenu>-->
-<!--          <el-submenu index="2">-->
-<!--            <template slot="title"><i class="el-icon-menu"></i>导航二</template>-->
-<!--            <el-menu-item-group>-->
-<!--              <template slot="title">分组一</template>-->
-<!--              <el-menu-item index="2-1">选项1</el-menu-item>-->
-<!--              <el-menu-item index="2-2">选项2</el-menu-item>-->
-<!--            </el-menu-item-group>-->
-<!--            <el-menu-item-group title="分组2">-->
-<!--              <el-menu-item index="2-3">选项3</el-menu-item>-->
-<!--            </el-menu-item-group>-->
-<!--            <el-submenu index="2-4">-->
-<!--              <template slot="title">选项4</template>-->
-<!--              <el-menu-item index="2-4-1">选项4-1</el-menu-item>-->
-<!--            </el-submenu>-->
-<!--          </el-submenu>-->
-<!--          <el-submenu index="3">-->
-<!--            <template slot="title"><i class="el-icon-setting"></i>导航三</template>-->
-<!--            <el-menu-item-group>-->
-<!--              <template slot="title">分组一</template>-->
-<!--              <el-menu-item index="3-1">选项1</el-menu-item>-->
-<!--              <el-menu-item index="3-2">选项2</el-menu-item>-->
-<!--            </el-menu-item-group>-->
-<!--            <el-menu-item-group title="分组2">-->
-<!--              <el-menu-item index="3-3">选项3</el-menu-item>-->
-<!--            </el-menu-item-group>-->
-<!--            <el-submenu index="3-4">-->
-<!--              <template slot="title">选项4</template>-->
-<!--              <el-menu-item index="3-4-1">选项4-1</el-menu-item>-->
-<!--            </el-submenu>-->
-<!--          </el-submenu>-->
-<!--        </el-menu>-->
-<!--      </el-aside>-->
-
-<!--      <el-container>-->
-<!--        <el-header style="text-align: right; font-size: 12px; line-height: 60px">-->
-<!--          <el-dropdown>-->
-<!--            <i class="el-icon-setting" style="margin-right: 15px"></i>-->
-<!--            <el-dropdown-menu slot="dropdown">-->
-<!--              <el-dropdown-item>查看</el-dropdown-item>-->
-<!--              <el-dropdown-item>新增</el-dropdown-item>-->
-<!--              <el-dropdown-item>删除</el-dropdown-item>-->
-<!--            </el-dropdown-menu>-->
-<!--          </el-dropdown>-->
-<!--          <span>王小虎</span>-->
-<!--        </el-header>-->
-
-<!--        <el-main>-->
-<!--          <el-table :data="tableData">-->
-<!--            <el-table-column prop="date" label="日期" width="140">-->
-<!--            </el-table-column>-->
-<!--            <el-table-column prop="name" label="姓名" width="120">-->
-<!--            </el-table-column>-->
-<!--            <el-table-column prop="address" label="地址">-->
-<!--            </el-table-column>-->
-<!--          </el-table>-->
-<!--        </el-main>-->
-<!--      </el-container>-->
-<!--    </el-container>-->
-<!--  </div>-->
   <el-container style="border-left: 50px solid lightgray;border-right: 50px solid lightgray;height: 100% ;">
     <el-container style="height: 50px;">
 <!--      <div class="line"></div>-->
@@ -95,10 +17,6 @@
         <el-menu-item index="5">重修课程</el-menu-item>
         <el-menu-item index="6">体育课</el-menu-item>
         <el-menu-item index="7">辅修</el-menu-item>
-<!--        <el-menu-item index="1" ></el-menu-item>-->
-<!--        <el-submenu index="2"></el-submenu>-->
-<!--        <el-menu-item index="3" >消息中心</el-menu-item>-->
-<!--        <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
       </el-menu>
       <el-header></el-header>
     </el-container>
@@ -160,11 +78,9 @@
               </el-option>
             </el-select>
           </template>
-          <el-input style="width: 200px; margin-left: 10px" suffix-icon="el-icon-search"></el-input><el-button class="ml-5">搜索</el-button>
+          <el-input style="width: 200px; margin-left: 10px" suffix-icon="el-icon-search" v-model="name"></el-input><el-button class="ml-5" @click="loadsearch">搜索</el-button>
         </div>
         <el-table :data="tableData" height="600">
-<!--          <el-table-column prop="id" label="id" width="50">-->
-<!--          </el-table-column>-->
           <el-table-column prop="idnumber" label="课程号" width="100">
           </el-table-column>
           <el-table-column prop="name" label="课程名" width="100">
@@ -188,13 +104,6 @@
           <el-table-column prop="explain" label="课程说明">
           </el-table-column>
         </el-table>
-<!--        <div >-->
-<!--          <el-pagination-->
-<!--              style="margin-left: 37%"-->
-<!--              layout="prev, pager, next"-->
-<!--              :total="total">-->
-<!--          </el-pagination>-->
-<!--        </div>-->
         <div class="block">
           <el-pagination
               @size-change="handleSizeChange"
@@ -209,7 +118,6 @@
         </div>
       </el-main>
     </el-container>
-<!--    <el-main style="height: 600px;">Main</el-main>-->
       <xinxi1 style="margin-left: 615px">（当前选课在线人数9人）</xinxi1>
     <el-footer style="margin-left: 480px">版权信息：© 2023 北理软工股份有限公司 京ICP备1111号</el-footer>
   </el-container>
@@ -224,6 +132,7 @@ export default {
     return{
       tableData: [],
       total: 0,
+      name: "",
       pageNum: 1,
       pageSize: 4,
       // msg:"hello Mu"
@@ -300,16 +209,10 @@ export default {
   },
   created() {
     //请求分页查询数据
-    // fetch( "http://localhost:9090/page?pageNum="+this.pageNum+"&pageSize="+this.pageSize).then(res => res.json()).then(res => {
-    //   console.log(res)
-    //   this.tableData = res.data
-    //   console.log(this.tableData)
-    //   this.total = res.total
-    //   console.log(this.total)
-    // })
     this.load()
   },
   methods:{
+    //请求分页查询函数
     load(){
       fetch( "http://localhost:9090/page?pageNum="+this.pageNum+"&pageSize="+this.pageSize).then(res => res.json()).then(res => {
         console.log(res)
@@ -319,6 +222,16 @@ export default {
         console.log(this.total)
       })
     },
+    loadsearch(){
+      fetch( "http://localhost:9090/search?name="+this.name+"&pageNum="+this.pageNum+"&pageSize="+this.pageSize).then(res => res.json()).then(res => {
+        console.log(res)
+        this.tableData = res.data
+        console.log(this.tableData)
+        this.total = res.total
+        console.log(this.total)
+      })
+    },
+    //以下两个函数为分页后，更改页数以及每页数据数后重新请求数据
     handleSizeChange(pageSize){
       console.log(pageSize)
       this.pageSize=pageSize
