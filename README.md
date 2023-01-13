@@ -11,6 +11,7 @@
 	postgresql	15.1
 	maven		3.6.3
 	jpa		2.7.6
+	axios		1.2.2
 	
 
 1月5日项目状态：
