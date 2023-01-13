@@ -188,10 +188,22 @@
           <el-table-column prop="explain" label="课程说明">
           </el-table-column>
         </el-table>
-        <div >
+<!--        <div >-->
+<!--          <el-pagination-->
+<!--              style="margin-left: 37%"-->
+<!--              layout="prev, pager, next"-->
+<!--              :total="total">-->
+<!--          </el-pagination>-->
+<!--        </div>-->
+        <div class="block">
           <el-pagination
-              style="margin-left: 37%"
-              layout="prev, pager, next"
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page="pageNum"
+              style="margin-left: 30%"
+              :page-sizes="[2, 4, 8, 10]"
+              :page-size="pageSize"
+              layout="total, sizes, prev, pager, next, jumper"
               :total="total">
           </el-pagination>
         </div>
@@ -212,6 +224,8 @@ export default {
     return{
       tableData: [],
       total: 0,
+      pageNum: 1,
+      pageSize: 4,
       // msg:"hello Mu"
       options: [{
         value: '选项1',
@@ -286,13 +300,35 @@ export default {
   },
   created() {
     //请求分页查询数据
-    fetch( "http://localhost:9090/page?pageNum=1&pageSize=4").then(res => res.json()).then(res => {
-      console.log(res)
-      this.tableData = res.data
-      console.log(this.tableData)
-      this.total = res.total
-      console.log(this.total)
-    })
+    // fetch( "http://localhost:9090/page?pageNum="+this.pageNum+"&pageSize="+this.pageSize).then(res => res.json()).then(res => {
+    //   console.log(res)
+    //   this.tableData = res.data
+    //   console.log(this.tableData)
+    //   this.total = res.total
+    //   console.log(this.total)
+    // })
+    this.load()
+  },
+  methods:{
+    load(){
+      fetch( "http://localhost:9090/page?pageNum="+this.pageNum+"&pageSize="+this.pageSize).then(res => res.json()).then(res => {
+        console.log(res)
+        this.tableData = res.data
+        console.log(this.tableData)
+        this.total = res.total
+        console.log(this.total)
+      })
+    },
+    handleSizeChange(pageSize){
+      console.log(pageSize)
+      this.pageSize=pageSize
+      this.load()
+    },
+    handleCurrentChange(pageNum){
+      console.log(pageNum)
+      this.pageNum=pageNum
+      this.load()
+    }
   }
 }
 </script>
