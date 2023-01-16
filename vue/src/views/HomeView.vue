@@ -214,22 +214,43 @@ export default {
   methods:{
     //请求分页查询函数
     load(){
-      fetch( "http://localhost:9090/page?pageNum="+this.pageNum+"&pageSize="+this.pageSize).then(res => res.json()).then(res => {
+      this.request.get("http://localhost:9090/page",{
+        params:{
+          pageNum: this.pageNum,
+          pageSize: this.pageSize
+        }
+      }).then(res => {
         console.log(res)
         this.tableData = res.data
-        console.log(this.tableData)
         this.total = res.total
-        console.log(this.total)
       })
+      // fetch( "http://localhost:9090/page?pageNum="+this.pageNum+"&pageSize="+this.pageSize).then(res => res.json()).then(res => {
+      //   console.log(res)
+      //   this.tableData = res.data
+      //   console.log(this.tableData)
+      //   this.total = res.total
+      //   console.log(this.total)
+      // })
     },
     loadsearch(){
-      fetch( "http://localhost:9090/search?name="+this.name+"&pageNum="+this.pageNum+"&pageSize="+this.pageSize).then(res => res.json()).then(res => {
+      this.request.get("http://localhost:9090/search",{
+        params:{
+          name:this.name,
+          pageNum:this.pageNum,
+          pageSize:this.pageSize
+        }
+      }).then(res => {
         console.log(res)
         this.tableData = res.data
-        console.log(this.tableData)
         this.total = res.total
-        console.log(this.total)
       })
+      // fetch( "http://localhost:9090/search?name="+this.name+"&pageNum="+this.pageNum+"&pageSize="+this.pageSize).then(res => res.json()).then(res => {
+      //   console.log(res)
+      //   this.tableData = res.data
+      //   console.log(this.tableData)
+      //   this.total = res.total
+      //   console.log(this.total)
+      // })
     },
     //以下两个函数为分页后，更改页数以及每页数据数后重新请求数据
     handleSizeChange(pageSize){

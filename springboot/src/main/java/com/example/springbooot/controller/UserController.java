@@ -23,7 +23,6 @@ public class UserController {
         userRepository.save(user);
         return "SUCCESS";
     }
-
     //通过id删除
     @DeleteMapping("/deleteuser")
     public String deleteUser(Integer id) {
