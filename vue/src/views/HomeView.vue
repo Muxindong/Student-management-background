@@ -1,7 +1,6 @@
 <template>
   <el-container style="border-left: 50px solid lightgray;border-right: 50px solid lightgray;height: 100% ;">
-    <el-container style="height: 50px;">
-<!--      <div class="line"></div>-->
+
       <el-menu
           :default-active="activeIndex2"
           class="el-menu-demo"
@@ -18,19 +17,6 @@
         <el-menu-item index="6">体育课</el-menu-item>
         <el-menu-item index="7">辅修</el-menu-item>
       </el-menu>
-      <el-header></el-header>
-    </el-container>
-    <el-container style="height: 400px;">
-      <el-header style="text-align: right; font-size: 12px">
-        <el-dropdown>
-          <i class="el-icon-setting" style="margin-right: 15px"></i>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>查看</el-dropdown-item>
-            <el-dropdown-item>新增</el-dropdown-item>
-            <el-dropdown-item>删除</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </el-header>
 
       <el-main style="height: 400px;">
         <div>
@@ -68,6 +54,7 @@
             </el-select>
           </template>
           <el-input style="width: 200px; margin-left: 10px" suffix-icon="el-icon-search" v-model="name"></el-input><el-button class="ml-5" @click="loadsearch">搜索</el-button>
+          <el-button class="ml-5">增添</el-button>
         </div>
         <el-table :data="tableData" height="600">
           <el-table-column prop="idnumber" label="课程号" width="100">
@@ -114,9 +101,9 @@
           </el-pagination>
         </div>
       </el-main>
-    </el-container>
+
       <xinxi1 style="margin-left: 615px">（当前选课在线人数9人）</xinxi1>
-    <el-footer style="margin-left: 480px">版权信息：© 2023 北理软工股份有限公司 京ICP备1111号</el-footer>
+      <el-footer style="margin-left: 480px">版权信息：© 2023 北理软工股份有限公司 京ICP备1111号</el-footer>
   </el-container>
 </template>
 
