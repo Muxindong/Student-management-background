@@ -18,7 +18,7 @@
         <el-menu-item index="7">辅修</el-menu-item>
       </el-menu>
 
-      <el-main style="height: 400px;">
+      <el-main>
         <div>
            <sfym style="margin-left: 10px">是否已满: </sfym>
           <template>
@@ -54,7 +54,7 @@
             </el-select>
           </template>
           <el-input style="width: 200px; margin-left: 10px" suffix-icon="el-icon-search" v-model="name"></el-input><el-button class="ml-5" @click="loadsearch">搜索</el-button>
-          <el-button class="ml-5">增添</el-button>
+          <el-button class="ml-5" @click="handleAdd">增添</el-button>
         </div>
         <el-table :data="tableData" height="600">
           <el-table-column prop="idnumber" label="课程号" width="100">
@@ -100,6 +100,49 @@
               :total="total">
           </el-pagination>
         </div>
+
+        <el-dialog title="课程信息" :visible.sync="dialogFormVisible" center width="30%">
+          <el-form label-width="80px">
+            <el-form-item label="课程号">
+              <el-input v-model="form.idnumber" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="课程名">
+              <el-input v-model="form.name" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="教师">
+              <el-input v-model="form.teacher" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="时间地点">
+              <el-input v-model="form.time" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="课容量">
+              <el-input v-model="form.capacity" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="已选人数">
+              <el-input v-model="form.number" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="课程性质">
+              <el-input v-model="form.nature" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="课程属性">
+              <el-input v-model="form.attribute" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="开课单位">
+              <el-input v-model="form.unit" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="学分">
+              <el-input v-model="form.credit" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="课程说明">
+              <el-input v-model="form.explain" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="saveHandleAdd">确 定</el-button>
+          </div>
+        </el-dialog>
+
       </el-main>
 
       <xinxi1 style="margin-left: 615px">（当前选课在线人数9人）</xinxi1>
@@ -122,6 +165,8 @@ export default {
       flag:0,//模糊查询中判断是否为已满的标志，0为不筛选该部分，1为已满，2为未满
       pageNum: 1,//分页中的第几页
       pageSize: 4,//分页中的取多少条数据
+      dialogFormVisible: false,
+      form: {},
       // msg:"hello Mu"
       options: [{
         value: '',
@@ -256,6 +301,26 @@ export default {
       }
       this.loadsearch()
     },
+
+    //该函数为新增数据时初始化以及显示弹窗
+    handleAdd(){
+      this.dialogFormVisible = true
+      this.form = {}
+    },
+
+    saveHandleAdd(){
+      this.request.post("http://localhost:9090/adduser" , this.form).then(res =>{
+        if(res){
+          this.$message.success("保存成功")
+          this.dialogFormVisible = false
+        }
+        else{
+          this.$message.error("保存失败")
+        }
+      })
+    }
+
+
   }
 }
 </script>
