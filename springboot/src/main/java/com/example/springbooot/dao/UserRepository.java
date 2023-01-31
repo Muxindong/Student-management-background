@@ -8,18 +8,33 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User,Integer> {
 
-    //分页
-    @Query(value = "Select * from users limit ? offset ?", nativeQuery = true)
-    List<User> findPage(Integer pagesize,Integer pagenumberfinstid);
-
-    @Query(value = "SELECT count(*) from users", nativeQuery = true)
-    Integer selectTotal();
+//    //分页
+//    @Query(value = "Select * from users limit ? offset ?", nativeQuery = true)
+//    List<User> findPage(Integer pagesize,Integer pagenumberfinstid);
+//
+//    @Query(value = "SELECT count(*) from users", nativeQuery = true)
+//    Integer selectTotal();
 
 
     //模糊查询+分页
-    @Query(value = "Select * from users where name like concat('%', ? , '%') limit ? offset ?", nativeQuery = true)
-    List<User> findSearch(String name,Integer pagesize,Integer pagenumberfinstid);
+    //以下两个为显示所有课程
+    @Query(value = "Select * from users where name like concat('%', ? , '%') AND nature like concat('%', ? , '%') AND attribute like concat('%', ? , '%') limit ? offset ?", nativeQuery = true)
+    List<User> findSearch1(String name,String nature,String attribute,Integer pagesize,Integer pagenumberfinstid);
 
-    @Query(value = "SELECT count(*) from users where name like concat('%', ? , '%')", nativeQuery = true)
-    Integer selectSearchTotal(String name);
+    @Query(value = "SELECT count(*) from users where name like concat('%', ? , '%') AND nature like concat('%', ? , '%') AND attribute like concat('%', ? , '%') ", nativeQuery = true)
+    Integer selectSearchTotal1(String name,String nature,String attribute);
+
+    //以下两个为显示已满的课程
+    @Query(value = "Select * from users where name like concat('%', ? , '%') AND nature like concat('%', ? , '%') AND attribute like concat('%', ? , '%') AND capacity=number limit ? offset ?", nativeQuery = true)
+    List<User> findSearch2(String name,String nature,String attribute,Integer pagesize,Integer pagenumberfinstid);
+
+    @Query(value = "SELECT count(*) from users where name like concat('%', ? , '%') AND nature like concat('%', ? , '%') AND attribute like concat('%', ? , '%') AND capacity=number ", nativeQuery = true)
+    Integer selectSearchTotal2(String name,String nature,String attribute);
+
+    //以下两个为显示未满的课程
+    @Query(value = "Select * from users where name like concat('%', ? , '%') AND nature like concat('%', ? , '%') AND attribute like concat('%', ? , '%') AND capacity!=number limit ? offset ?", nativeQuery = true)
+    List<User> findSearch3(String name,String nature,String attribute,Integer pagesize,Integer pagenumberfinstid);
+
+    @Query(value = "SELECT count(*) from users where name like concat('%', ? , '%') AND nature like concat('%', ? , '%') AND attribute like concat('%', ? , '%') AND capacity!=number ", nativeQuery = true)
+    Integer selectSearchTotal3(String name,String nature,String attribute);
 }

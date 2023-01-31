@@ -34,20 +34,9 @@
 
       <el-main style="height: 400px;">
         <div>
-          <ct>冲突: </ct>
-          <template>
-            <el-select v-model="value1" placeholder="请选择" style="width: 100px">
-              <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-              </el-option>
-            </el-select>
-          </template>
            <sfym style="margin-left: 10px">是否已满: </sfym>
           <template>
-            <el-select v-model="value2" placeholder="请选择" style="width: 100px">
+            <el-select v-model="value2" placeholder="请选择" style="width: 100px" @change="flagChange">
               <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -58,7 +47,7 @@
           </template>
           <kcsx style="margin-left: 10px">课程属性: </kcsx>
           <template>
-            <el-select v-model="value3" placeholder="请选择" style="width: 100px">
+            <el-select v-model="value3" placeholder="请选择" style="width: 100px" @change="attributeChange">
               <el-option
                   v-for="item in options1"
                   :key="item.value"
@@ -69,7 +58,7 @@
           </template>
           <kcxz style="margin-left: 10px">课程性质: </kcxz>
           <template>
-            <el-select v-model="value4" placeholder="请选择" style="width: 200px">
+            <el-select v-model="value4" placeholder="请选择" style="width: 200px" @change="natureChange">
               <el-option
                   v-for="item in options2"
                   :key="item.value"
@@ -103,6 +92,14 @@
           </el-table-column>
           <el-table-column prop="explain" label="课程说明">
           </el-table-column>
+          <el-table-column
+              fixed="right"
+              label="操作">
+            <template slot-scope="scope">
+              <el-button type="text" size="small">编辑</el-button>
+              <el-button type="text" size="small">删除</el-button>
+            </template>
+          </el-table-column>
         </el-table>
         <div class="block">
           <el-pagination
@@ -130,78 +127,80 @@ export default {
   data(){
 
     return{
-      tableData: [],
-      total: 0,
-      name: "",
-      pageNum: 1,
-      pageSize: 4,
+      tableData: [],//表格数据
+      total: 0,//表格数据条数
+      name: "",//模糊查询中的课程名
+      nature: "",//模糊查询中的课程性质
+      attribute: "",//模糊查询中的课程属性
+      flag:0,//模糊查询中判断是否为已满的标志，0为不筛选该部分，1为已满，2为未满
+      pageNum: 1,//分页中的第几页
+      pageSize: 4,//分页中的取多少条数据
       // msg:"hello Mu"
       options: [{
-        value: '选项1',
+        value: '',
         label: '请选择'
       }, {
-        value: '选项2',
+        value: '1',
         label: '是'
       }, {
-        value: '选项3',
+        value: '2',
         label: '否'
       }],
-      value1: '',
       value2: '',
 
       options1: [{
-        value: '选项1',
+        value: '',
         label: '请选择'
       }, {
-        value: '选项2',
+        value: '必修',
         label: '必修'
       }, {
-        value: '选项3',
+        value: '选修',
         label: '选修'
       }, {
-        value: '选项4',
+        value: '任选',
         label: '任选'
       }, {
-        value: '选项5',
+        value: '限选',
         label: '限选'
       }, {
-        value: '选项6',
+        value: '校公选课',
         label: '校公选课'
       }],
       value3: '',
 
       options2: [{
-        value: '选项1',
+        value: '',
         label: '请选择'
       }, {
-        value: '选项2',
+        value: '公共基础课程',
         label: '公共基础课程'
       }, {
-        value: '选项3',
+        value: '拓展英语',
         label: '拓展英语'
       }, {
-        value: '选项4',
+        value: '专业基础课程',
         label: '专业基础课程'
       }, {
-        value: '选项5',
+        value: '专业课',
         label: '专业课'
       }, {
-        value: '选项6',
+        value: '平台基础',
         label: '平台基础'
       }, {
-        value: '选项7',
+        value: '校公选课',
         label: '校公选课'
       }, {
-        value: '选项8',
+        value: '体育课',
         label: '体育课'
       }, {
-        value: '选项9',
+        value: '实践环节',
         label: '实践环节'
       }, {
-        value: '选项10',
+        value: '大类基础',
         label: '大类基础'
       }, {
-        value: '选项11',
+        value: '基础教育',
         label: '基础教育'
       }],
       value4: '',
@@ -209,33 +208,17 @@ export default {
   },
   created() {
     //请求分页查询数据
-    this.load()
+    this.loadsearch()
   },
   methods:{
     //请求分页查询函数
-    load(){
-      this.request.get("http://localhost:9090/page",{
-        params:{
-          pageNum: this.pageNum,
-          pageSize: this.pageSize
-        }
-      }).then(res => {
-        console.log(res)
-        this.tableData = res.data
-        this.total = res.total
-      })
-      // fetch( "http://localhost:9090/page?pageNum="+this.pageNum+"&pageSize="+this.pageSize).then(res => res.json()).then(res => {
-      //   console.log(res)
-      //   this.tableData = res.data
-      //   console.log(this.tableData)
-      //   this.total = res.total
-      //   console.log(this.total)
-      // })
-    },
     loadsearch(){
       this.request.get("http://localhost:9090/search",{
         params:{
           name:this.name,
+          nature:this.nature,
+          attribute:this.attribute,
+          flag:this.flag,
           pageNum:this.pageNum,
           pageSize:this.pageSize
         }
@@ -244,25 +227,48 @@ export default {
         this.tableData = res.data
         this.total = res.total
       })
-      // fetch( "http://localhost:9090/search?name="+this.name+"&pageNum="+this.pageNum+"&pageSize="+this.pageSize).then(res => res.json()).then(res => {
-      //   console.log(res)
-      //   this.tableData = res.data
-      //   console.log(this.tableData)
-      //   this.total = res.total
-      //   console.log(this.total)
-      // })
     },
+
     //以下两个函数为分页后，更改页数以及每页数据数后重新请求数据
     handleSizeChange(pageSize){
       console.log(pageSize)
       this.pageSize=pageSize
-      this.load()
+      this.loadsearch()
     },
     handleCurrentChange(pageNum){
       console.log(pageNum)
       this.pageNum=pageNum
-      this.load()
-    }
+      this.loadsearch()
+    },
+
+    //改函数为改变课程性质后重新请求数据
+    natureChange(value){
+      console.log(value)
+      this.nature=value
+      this.loadsearch()
+    },
+
+    //改函数为改变课程属性后重新请求数据
+    attributeChange(value){
+      console.log(value)
+      this.attribute=value
+      this.loadsearch()
+    },
+
+    //改函数为改变是否已满后重新请求数据
+    flagChange(value){
+      console.log(value)
+      if(value=="1"){
+        this.flag=1
+      }
+      else if(value=="2"){
+        this.flag=2
+      }
+      else{
+        this.flag=0
+      }
+      this.loadsearch()
+    },
   }
 }
 </script>

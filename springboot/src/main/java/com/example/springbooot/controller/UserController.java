@@ -19,14 +19,13 @@ public class UserController {
     //增
     @PostMapping("/adduser")
     public String addUser(@RequestBody User user){
-
         userRepository.save(user);
         return "SUCCESS";
     }
+
     //通过id删除
     @DeleteMapping("/deleteuser")
     public String deleteUser(Integer id) {
-
         userRepository.deleteById(id);
         return "SUCCESS";
     }
@@ -37,30 +36,29 @@ public class UserController {
         return userRepository.findById(id);
     }
 
-    //分页
-    @RequestMapping("/page")
-    public Map<String,Object> findPage(@RequestParam Integer pageNum,@RequestParam Integer pageSize){
-        Integer pagenumberfinstid=(pageNum-1)*pageSize;
-        List<User> data = userRepository.findPage(pageSize, pagenumberfinstid);
-        Integer total = userRepository.selectTotal();
-        Map<String,Object> res=new HashMap<>();
-        res.put("data",data);
-        res.put("total",total);
-        return res;
-    }
-
     //模糊查询+分页
     @RequestMapping("/search")
-    public Map<String,Object> findSearch(@RequestParam Integer pageNum,@RequestParam Integer pageSize,@RequestParam String name){
+    public Map<String,Object> findSearch1(@RequestParam Integer pageNum,@RequestParam Integer pageSize,@RequestParam String name,@RequestParam String nature,@RequestParam String attribute,@RequestParam Integer flag){
         Integer pagenumberfinstid=(pageNum-1)*pageSize;
-        List<User> data = userRepository.findSearch(name,pageSize, pagenumberfinstid);
-        Integer total = userRepository.selectSearchTotal(name);
+        List<User> data;
+        Integer total;
+        if(flag==0){//显示所有课程
+            data = userRepository.findSearch1(name,nature,attribute,pageSize, pagenumberfinstid);
+            total = userRepository.selectSearchTotal1(name,nature,attribute);
+        }
+        else if(flag==1){//显示已选满课程
+            data = userRepository.findSearch2(name,nature,attribute,pageSize, pagenumberfinstid);
+            total = userRepository.selectSearchTotal2(name,nature,attribute);
+        }
+        else{//显示未选满课程
+            data = userRepository.findSearch3(name,nature,attribute,pageSize, pagenumberfinstid);
+            total = userRepository.selectSearchTotal3(name,nature,attribute);
+        }
         Map<String,Object> res=new HashMap<>();
         res.put("data",data);
         res.put("total",total);
         return res;
     }
-
 
     //将表中所有数据输出
     @RequestMapping("/")
