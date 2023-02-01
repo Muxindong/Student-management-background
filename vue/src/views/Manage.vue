@@ -1,22 +1,9 @@
 <template>
   <el-container style="border-left: 50px solid lightgray;border-right: 50px solid lightgray;height: 100% ;">
 
-      <el-menu
-          :default-active="activeIndex2"
-          class="el-menu-demo"
-          mode="horizontal"
-          @select="handleSelect"
-          background-color="#545c64"
-          text-color="#fff"
-          active-text-color="#ffd04b">
-        <el-menu-item index="1">系统推荐课程</el-menu-item>
-        <el-menu-item index="2">方案内课程</el-menu-item>
-        <el-menu-item index="3">方案外课程</el-menu-item>
-        <el-menu-item index="4">校公选课/拓展英语</el-menu-item>
-        <el-menu-item index="5">重修课程</el-menu-item>
-        <el-menu-item index="6">体育课</el-menu-item>
-        <el-menu-item index="7">辅修</el-menu-item>
-      </el-menu>
+      <el-header>
+        <Aside/>
+      </el-header>
 
       <el-main>
         <div>
@@ -155,12 +142,17 @@
 
       </el-main>
 
-      <xinxi1 style="margin-left: 615px">（当前选课在线人数9人）</xinxi1>
-      <el-footer style="margin-left: 480px">版权信息：© 2023 北理软工股份有限公司 京ICP备1111号</el-footer>
+      <el-footer>
+        <Footer/>
+      </el-footer>
+
   </el-container>
 </template>
 
 <script>
+
+import Aside from "@/components/Aside";
+import Footer from "@/components/Footer";
 
 export default {
   name: 'HomeView',
@@ -252,10 +244,11 @@ export default {
     //请求分页查询数据
     this.loadsearch()
   },
+  components:{
+    Aside,
+    Footer
+  },
   methods:{
-
-
-
     //请求分页查询函数
     loadsearch(){
       this.request.get("http://localhost:9090/search",{
