@@ -157,6 +157,7 @@ export default {
   data(){
 
     return{
+      id: 15,
       tableData: [],//表格数据
       total: 0,//表格数据条数
       name: "",//模糊查询中的课程名
@@ -306,21 +307,22 @@ export default {
     handleAdd(){
       this.dialogFormVisible = true
       this.form = {}
+      this.form.id = this.id
     },
 
     saveHandleAdd(){
-      this.request.post("http://localhost:9090/adduser" , this.form).then(res =>{
+      this.request.post("http://localhost:9090/adduser" ,this.form).then(res =>{
+        console.log(res)
         if(res){
           this.$message.success("保存成功")
           this.dialogFormVisible = false
+          this.id++
         }
         else{
           this.$message.error("保存失败")
         }
       })
     }
-
-
   }
 }
 </script>

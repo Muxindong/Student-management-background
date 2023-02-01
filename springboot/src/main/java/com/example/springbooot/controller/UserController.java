@@ -18,10 +18,21 @@ public class UserController {
 
     //增
     @PostMapping("/adduser")
-    public String addUser(@RequestBody User user){
+    public Map<String,Object> addUser(@RequestBody User user){
         userRepository.save(user);
-        return "SUCCESS";
+        Map<String,Object> res=new HashMap<>();
+        Integer success=1;
+        res.put("success",success);
+        return res;
+//        return "SUCCESS";
     }
+
+//    //增
+//    @PostMapping("/adduser")
+//    public String addUser(@RequestBody User user){
+//        userRepository.insertAdd(user);
+//        return "SUCCESS";
+//    }
 
     //通过id删除
     @DeleteMapping("/deleteuser")

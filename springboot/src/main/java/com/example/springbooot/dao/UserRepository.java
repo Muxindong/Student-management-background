@@ -37,4 +37,9 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Query(value = "SELECT count(*) from users where name like concat('%', ? , '%') AND nature like concat('%', ? , '%') AND attribute like concat('%', ? , '%') AND capacity!=number ", nativeQuery = true)
     Integer selectSearchTotal3(String name,String nature,String attribute);
+
+
+//    //增添数据
+//    @Query(value = "INSERT into users(id,idnumber,name,teacher,time,capacity,number,nature,attribute,unit,credit,explain) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ", nativeQuery = true)
+//    Integer insertAdd(User user);
 }
