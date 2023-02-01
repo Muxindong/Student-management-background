@@ -83,8 +83,18 @@
               fixed="right"
               label="操作">
             <template slot-scope="scope">
-              <el-button type="text" size="small">编辑</el-button>
-              <el-button type="text" size="small">删除</el-button>
+              <el-button type="text" size="small" @click="handleEdit(scope.row)">编辑</el-button>
+              <el-popconfirm
+                  style="margin-left:5px"
+                  confirm-button-text='确定'
+                  cancel-button-text='我再想想'
+                  icon="el-icon-info"
+                  icon-color="red"
+                  title="您确定删除吗？"
+                  @confirm="handleDelete(scope.row.id)"
+              >
+                <el-button type="text" size="small" slot="reference">删除</el-button>
+              </el-popconfirm>
             </template>
           </el-table-column>
         </el-table>
@@ -311,19 +321,39 @@ export default {
       this.form = {}
       this.form.id = this.id
     },
-
+    //新增函数
     saveHandleAdd(){
       this.request.post("http://localhost:9090/adduser" ,this.form).then(res =>{
         console.log(res)
         if(res){
           this.$message.success("保存成功")
           this.dialogFormVisible = false
+          this.loadsearch()
         }
         else{
           this.$message.error("保存失败")
         }
       })
+    },
+
+    handleEdit(row){
+      this.form = row
+      this.dialogFormVisible = true
+    },
+
+    handleDelete(id){
+      this.request.delete("http://localhost:9090/deleteuser",{params:{id}}).then(res=>{
+        console.log(res)
+        if(res){
+          this.$message.success("删除成功")
+          this.loadsearch()
+        }
+        else{
+          this.$message.error("删除失败")
+        }
+      })
     }
+
   }
 }
 </script>
