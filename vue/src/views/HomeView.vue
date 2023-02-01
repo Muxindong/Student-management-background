@@ -157,7 +157,6 @@ export default {
   data(){
 
     return{
-      id: 15,
       tableData: [],//表格数据
       total: 0,//表格数据条数
       name: "",//模糊查询中的课程名
@@ -244,6 +243,9 @@ export default {
     this.loadsearch()
   },
   methods:{
+
+
+
     //请求分页查询函数
     loadsearch(){
       this.request.get("http://localhost:9090/search",{
@@ -316,7 +318,6 @@ export default {
         if(res){
           this.$message.success("保存成功")
           this.dialogFormVisible = false
-          this.id++
         }
         else{
           this.$message.error("保存失败")

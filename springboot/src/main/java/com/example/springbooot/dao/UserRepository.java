@@ -39,7 +39,10 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     Integer selectSearchTotal3(String name,String nature,String attribute);
 
 
-//    //增添数据
-//    @Query(value = "INSERT into users(id,idnumber,name,teacher,time,capacity,number,nature,attribute,unit,credit,explain) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ", nativeQuery = true)
-//    Integer insertAdd(User user);
+    //增
+//    @Query(value = "INSERT into users(idnumber,name,teacher,time,capacity,number,nature,attribute,unit,credit,explain) VALUES (?,?,?,?,?,?,?,?,?,?,?) ", nativeQuery = true)
+//    Integer insertAdd(Integer idnumber,String name,String teacher,String time,Integer capacity,Integer number,String nature,String attribute,String unit,Integer credit,String explain);
+
+//    @Query(value = "INSERT into users(idnumber) VALUES (?) ",nativeQuery = true)
+//    Integer insertAdd(Integer idnumber);
 }

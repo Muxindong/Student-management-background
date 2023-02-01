@@ -16,7 +16,7 @@ public class UserController {
     @Resource
     private UserRepository userRepository;
 
-    //增
+//    增
     @PostMapping("/adduser")
     public Map<String,Object> addUser(@RequestBody User user){
         userRepository.save(user);
@@ -28,9 +28,16 @@ public class UserController {
     }
 
 //    //增
+//    @RequestMapping("/adduser")
+//    public String addUser(@RequestBody Integer idnumber){
+//        userRepository.insertAdd(idnumber);
+//        return "SUCCESS";
+//    }
+
+//    //增
 //    @PostMapping("/adduser")
-//    public String addUser(@RequestBody User user){
-//        userRepository.insertAdd(user);
+//    public String addUser(@RequestBody Integer idnumber,@RequestParam String name,@RequestParam String teacher,@RequestParam String time,@RequestParam Integer capacity,@RequestParam Integer number,@RequestParam String nature,@RequestParam String attribute,@RequestParam String unit,@RequestParam Integer credit,@RequestParam String explain){
+//        userRepository.insertAdd(idnumber,name,teacher,time,capacity,number,nature,attribute,unit,credit,explain);
 //        return "SUCCESS";
 //    }
 
