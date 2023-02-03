@@ -11,7 +11,7 @@ const routes = [
     component: () => import('../views/Manage.vue'),
     children:[
       {
-        path: '/', name: 'Manage', component: () => import('../views/Manage.vue')
+        path: 'SystemRecommend', name: 'SystemRecommend', component: () => import('../views/SystemRecommend.vue')
       }
     ]
   },
