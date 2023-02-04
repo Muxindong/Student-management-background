@@ -42,7 +42,7 @@ public class UserController {
         return userRepository.findById(id);
     }
 
-    //模糊查询+分页
+    //模糊查询+分页(系统推荐课程页面)
     @RequestMapping("/search")
     public Map<String,Object> findSearch1(@RequestParam Integer pageNum,@RequestParam Integer pageSize,@RequestParam String name,@RequestParam String nature,@RequestParam String attribute,@RequestParam Integer flag){
         Integer pagenumberfinstid=(pageNum-1)*pageSize;
@@ -59,6 +59,31 @@ public class UserController {
         else{//显示未选满课程
             data = userRepository.findSearch3(name,nature,attribute,pageSize, pagenumberfinstid);
             total = userRepository.selectSearchTotal3(name,nature,attribute);
+        }
+        Map<String,Object> res=new HashMap<>();
+        res.put("data",data);
+        res.put("total",total);
+        return res;
+    }
+
+
+    //模糊查询+分页(校公选课页面)
+    @RequestMapping("/searchp")
+    public Map<String,Object> findSearchp1(@RequestParam Integer pageNum,@RequestParam Integer pageSize,@RequestParam String name,@RequestParam String nature,@RequestParam String publicelective,@RequestParam Integer flag){
+        Integer pagenumberfinstid=(pageNum-1)*pageSize;
+        List<User> data;
+        Integer total;
+        if(flag==0){//显示所有课程
+            data = userRepository.findSearchp1(name,nature,publicelective,pageSize, pagenumberfinstid);
+            total = userRepository.selectSearchTotalp1(name,nature,publicelective);
+        }
+        else if(flag==1){//显示已选满课程
+            data = userRepository.findSearchp2(name,nature,publicelective,pageSize, pagenumberfinstid);
+            total = userRepository.selectSearchTotalp2(name,nature,publicelective);
+        }
+        else{//显示未选满课程
+            data = userRepository.findSearchp3(name,nature,publicelective,pageSize, pagenumberfinstid);
+            total = userRepository.selectSearchTotalp3(name,nature,publicelective);
         }
         Map<String,Object> res=new HashMap<>();
         res.put("data",data);

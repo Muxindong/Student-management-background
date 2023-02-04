@@ -22,4 +22,6 @@ public class User {
     private String unit;
     private Integer credit;
     private String explain;
+    private Integer types;
+    private String publicelective;
 }

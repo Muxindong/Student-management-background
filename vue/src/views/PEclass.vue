@@ -149,6 +149,7 @@ export default {
       flag:0,//模糊查询中判断是否为已满的标志，0为不筛选该部分，1为已满，2为未满
       pageNum: 1,//分页中的第几页
       pageSize: 4,//分页中的取多少条数据
+      types: 1,
       dialogFormVisible: false,
       form: {},
       options: [{
@@ -290,6 +291,7 @@ export default {
       this.dialogFormVisible = true
       this.form = {}
       this.form.id = this.id
+      this.form.types = this.types
     },
     //新增函数
     saveHandleAdd(){
