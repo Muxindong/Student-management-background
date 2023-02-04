@@ -9,10 +9,12 @@ const routes = [
     path: '/',
     name: 'Manage',
     component: () => import('../views/Manage.vue'),
+    redirect:"/SystemRecommend",
     children:[
-      {
-        path: 'SystemRecommend', name: 'SystemRecommend', component: () => import('../views/SystemRecommend.vue')
-      }
+      {path: 'SystemRecommend', name: 'SystemRecommend', component: () => import('../views/SystemRecommend.vue')},
+      {path: 'ElectiveCourses', name: 'ElectiveCourses', component: () => import('../views/ElectiveCourses.vue')},
+      {path: 'PEclass', name: 'PEclass', component: () => import('../views/PEclass.vue')},
+      {path: 'Minor', name: 'Minor', component: () => import('../views/Minor.vue')},
     ]
   },
   {
