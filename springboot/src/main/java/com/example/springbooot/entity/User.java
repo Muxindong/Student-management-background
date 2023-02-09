@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name="users")
-public class User {
+public class User {//该类为存储课程信息的实体类
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
