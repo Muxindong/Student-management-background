@@ -15,6 +15,7 @@ const routes = [
       {path: 'ElectiveCourses', name: 'ElectiveCourses', component: () => import('../views/ElectiveCourses.vue')},
       {path: 'PEclass', name: 'PEclass', component: () => import('../views/PEclass.vue')},
       {path: 'Minor', name: 'Minor', component: () => import('../views/Minor.vue')},
+      {path: 'Ordinary', name: 'Ordinary', component: () => import('../views/Ordinary.vue')},
     ]
   },
   {

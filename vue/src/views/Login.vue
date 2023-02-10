@@ -26,7 +26,12 @@ export default {
         console.log(res)
         if(res.exist&&res.illegal){
           this.$message.success("登录成功")
-          this.$router.push("/")
+          if(!res.flag){
+            this.$router.push("/")
+          }
+          else{
+            this.$router.push("/Ordinary")
+          }
         }
         else if(!res.illegal){
           this.$message.error("请输入合法的密码（大写字母+小写字母+数字+下划线组合）")

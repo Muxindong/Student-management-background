@@ -35,7 +35,7 @@
         </el-select>
       </template>
       <el-input style="width: 200px; margin-left: 10px" suffix-icon="el-icon-search" v-model="name"></el-input><el-button class="ml-5" @click="loadsearch">搜索</el-button>
-      <el-button class="ml-5" @click="handleAdd">增添</el-button>
+<!--      <el-button class="ml-5" @click="handleAdd">增添</el-button>-->
     </div>
     <el-table :data="tableData" height="600">
       <el-table-column prop="idnumber" label="课程号" width="100">
@@ -64,18 +64,18 @@
           fixed="right"
           label="操作">
         <template slot-scope="scope">
-          <el-button type="text" size="small" @click="handleEdit(scope.row)">编辑</el-button>
-          <el-popconfirm
-              style="margin-left:5px"
-              confirm-button-text='确定'
-              cancel-button-text='我再想想'
-              icon="el-icon-info"
-              icon-color="red"
-              title="您确定删除吗？"
-              @confirm="handleDelete(scope.row.id)"
-          >
-            <el-button type="text" size="small" slot="reference">删除</el-button>
-          </el-popconfirm>
+<!--          <el-button type="text" size="small" @click="handleEdit(scope.row)">编辑</el-button>-->
+<!--          <el-popconfirm-->
+<!--              style="margin-left:5px"-->
+<!--              confirm-button-text='确定'-->
+<!--              cancel-button-text='我再想想'-->
+<!--              icon="el-icon-info"-->
+<!--              icon-color="red"-->
+<!--              title="您确定删除吗？"-->
+<!--              @confirm="handleDelete(scope.row.id)"-->
+<!--          >-->
+<!--            <el-button type="text" size="small" slot="reference">删除</el-button>-->
+<!--          </el-popconfirm>-->
           <el-button type="text" size="small" style="margin-left:5px" @click="handleSelect(scope.row)">选课</el-button>
         </template>
       </el-table-column>
@@ -139,7 +139,7 @@
 
 <script>
 export default {
-  name: "SystemRecommend",
+  name: "Ordinary",
   data(){
     return{
       tableData: [],//表格数据
