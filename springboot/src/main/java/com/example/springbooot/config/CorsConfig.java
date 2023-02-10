@@ -16,11 +16,11 @@ public class CorsConfig {//该类为从后端解决跨域问题
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("*"); // 1 设置访问源地址
-        corsConfiguration.addAllowedHeader("*"); // 2 设置访问源请求头
-        corsConfiguration.addAllowedMethod("*"); // 3 设置访问源请求方法
+        corsConfiguration.addAllowedOrigin("*"); // 设置访问源地址
+        corsConfiguration.addAllowedHeader("*"); // 设置访问源请求头
+        corsConfiguration.addAllowedMethod("*"); // 设置访问源请求方法
         corsConfiguration.setMaxAge(MAX_AGE);
-        source.registerCorsConfiguration("/**", corsConfiguration); // 4 对接口配置跨域设置
+        source.registerCorsConfiguration("/**", corsConfiguration); // 对接口配置跨域设置
         return new CorsFilter(source);
     }
 }

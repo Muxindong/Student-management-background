@@ -39,10 +39,6 @@ public class TeacherServiceImpl implements TeacherService {
         }
         // 如果结果为空，那么创建新的实体
         // 根据dto映射实体类
-//        Teacher teacher=new Teacher();
-//        teacher.setAccount(dto.getAccount());
-//        teacher.setNickname(dto.getNickname());
-//        teacher.setPassword(dto.getPassword());
         Teacher teacher = modelMapper.map ( dto, Teacher.class );
         teacherRepository.save(teacher);
         return dto;

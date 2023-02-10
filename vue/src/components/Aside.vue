@@ -15,12 +15,21 @@
     <el-menu-item index="5" disabled>重修课程</el-menu-item>
     <el-menu-item index="/PEclass">体育课</el-menu-item>
     <el-menu-item index="/Minor">辅修</el-menu-item>
+
+    <el-menu-item>
+      <router-link to="/login" style="text-decoration: none">退出登录</router-link>
+    </el-menu-item>
   </el-menu>
 </template>
 
 <script>
 export default {
-  name: "Aside"
+  name: "Aside",
+  data(){
+    return{
+      teacher:"王小虎"
+    }
+  }
 }
 </script>
 
