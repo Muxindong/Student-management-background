@@ -15,7 +15,7 @@ public class UserController {
 
     @Resource
     private UserRepository userRepository;
-    
+
     //增
     @PostMapping("/adduser")
     public Map<String,Object> addUser(@RequestBody User user){
