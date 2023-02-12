@@ -6,6 +6,7 @@ import com.example.springbooot.dto.RegisterDto;
 import com.example.springbooot.entity.Teacher;
 import com.example.springbooot.service.TeacherService;
 import com.example.springbooot.util.PatternUtil;
+import com.example.springbooot.util.TokenUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,6 +72,9 @@ public class TeacherServiceImpl implements TeacherService {
             }
         }
         // 如果账号密码都正确，返回
-        return modelMapper.map ( one.orElseGet ( Teacher::new ), LoginDto.class );
+        String token = TokenUtil.genToken(one.get().getId().toString(), one.get().getPassword());
+        LoginDto dto1=modelMapper.map ( one.orElseGet ( Teacher::new ), LoginDto.class );
+        dto1.setToken(token);
+        return dto1;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.springbooot.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.example.springbooot.dto.LoginDto;
 import com.example.springbooot.dto.RegisterDto;
 import com.example.springbooot.service.TeacherService;
@@ -23,6 +24,7 @@ public class TeacherController {
 
     @PostMapping("register")
     public RegisterDto teacherRegister(@RequestBody RegisterDto dto) {
+
         RegisterDto register = teacherService.register ( dto );
         return register;
     }
